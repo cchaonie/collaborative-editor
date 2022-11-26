@@ -1,8 +1,9 @@
-import { WebSocketJSONStream } from '../../utils';
 import type ShareDB from 'sharedb';
-import { parseCookie } from '../../utils/parseCookie/parseCookie';
 import { IncomingMessage } from 'http';
 import { WebSocket } from 'ws';
+
+import { parseCookie } from '../../utils/parseCookie/parseCookie';
+import { WebSocketJSONStream } from './WebSocketJSONStream';
 
 const userMap = new Map();
 
