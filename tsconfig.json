@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "module": "NodeNext",
     "target": "es2017",
   },
@@ -11,5 +12,5 @@
   "exclude": [
     "node_modules",
     "src/client/**/*",
-  ]
+  ],
 }
