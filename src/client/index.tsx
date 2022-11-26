@@ -5,7 +5,7 @@ import App from './App';
 
 import './index.css';
 
-import './model/core/initializeShareDBDocument';
+import './models/core/initializeShareDBDocument';
 
 createRoot(document.querySelector('#root')).render(
   <StrictMode>
