@@ -1,6 +1,5 @@
 import { useContext } from 'react';
-import { AuthContext } from '../../contexts';
-import FilesContext from '../../contexts/FilesContext';
+import { AuthContext, FilesContext } from '../../contexts';
 import Files from '../Files';
 import MenuItem from './component/MenuItem';
 

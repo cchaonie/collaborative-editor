@@ -4,7 +4,7 @@ import { useRequest } from '../../hooks/useRequest/useRequest';
 import { UserStatus } from '../../models/core/type';
 import { getFingerprint } from '../../models/fingerprint/getFingerprint';
 
-const Auth = ({ children }) => {
+const AuthContainer = ({ children }) => {
   const [userId, setUserId] = useState('');
   const [userStatus, setUserStatus] = useState(UserStatus.NotLoggedIn);
 
@@ -45,4 +45,4 @@ const Auth = ({ children }) => {
   );
 };
 
-export default memo(Auth);
+export default memo(AuthContainer);
