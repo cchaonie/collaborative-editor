@@ -4,8 +4,6 @@ import { UserStatus } from '../models/core/type';
 import FileDescription from '../models/state/FileDescription';
 
 export interface FilesContextValue {
-  userId: string;
-  userStatus: UserStatus;
   files: FileDescription[];
   connection: Connection;
   setFiles: (files: FileDescription[]) => void;
