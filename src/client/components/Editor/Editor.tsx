@@ -6,13 +6,14 @@ import {
   useRef,
   useState,
 } from 'react';
-import { createEditor } from 'slate';
+import { createEditor, Descendant } from 'slate';
 import {
   Slate,
   Editable,
   withReact,
   RenderElementProps,
   RenderLeafProps,
+  ReactEditor,
 } from 'slate-react';
 import JSONFormatter from 'json-formatter-js';
 
@@ -34,8 +35,23 @@ export default () => {
 
   const clientDocRef = useRef(new ClientDocument());
 
+  const codeBlockRef = useRef(null);
+
+  const operationListener = useCallback(
+    (currentData: Descendant[]) => {
+      if (codeBlockRef.current && clientDocRef.current) {
+        const parent = codeBlockRef.current;
+        while (parent.firstChild) {
+          parent.removeChild(parent.firstChild);
+        }
+        parent.appendChild(new JSONFormatter(currentData, Infinity).render());
+      }
+    },
+    [codeBlockRef.current, clientDocRef.current]
+  );
+
   const [editor] = useState(() =>
-    withSync(clientDocRef.current)(withReact(createEditor()))
+    withSync(clientDocRef.current)(withReact(createEditor()), operationListener)
   );
 
   const [status, setStatus] = useState<ShareDBDocStatus>(
@@ -76,18 +92,6 @@ export default () => {
       }
     });
   }, [creator, name, connection]);
-
-  const codeBlockRef = useRef(null);
-
-  useLayoutEffect(() => {
-    if (codeBlockRef.current && clientDocRef.current) {
-      const parent = codeBlockRef.current;
-      while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-      }
-      parent.appendChild(new JSONFormatter(editor.children, Infinity).render());
-    }
-  });
 
   const renderContent =
     status === ShareDBDocStatus.Loading ? (
