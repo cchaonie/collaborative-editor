@@ -1,4 +1,11 @@
-import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import { createEditor } from 'slate';
 import {
   Slate,
@@ -72,7 +79,7 @@ export default () => {
 
   const codeBlockRef = useRef(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (codeBlockRef.current && clientDocRef.current) {
       const parent = codeBlockRef.current;
       while (parent.firstChild) {
