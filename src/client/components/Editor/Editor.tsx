@@ -7,6 +7,7 @@ import {
   RenderElementProps,
   RenderLeafProps,
 } from 'slate-react';
+import JSONFormatter from 'json-formatter-js';
 
 import { withSync } from '../../plugins/withSync';
 import Message from '../Message';
@@ -69,6 +70,18 @@ export default () => {
     });
   }, [creator, name, connection]);
 
+  const codeBlockRef = useRef(null);
+
+  useEffect(() => {
+    if (codeBlockRef.current && clientDocRef.current) {
+      const parent = codeBlockRef.current;
+      while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+      }
+      parent.appendChild(new JSONFormatter(editor.children, Infinity).render());
+    }
+  });
+
   const renderContent =
     status === ShareDBDocStatus.Loading ? (
       <Message>Loading......</Message>
@@ -82,6 +95,7 @@ export default () => {
             style={{ flexGrow: 1, paddingInline: '8px' }}
           />
         </Slate>
+        <div className={styles.sourceCode} ref={codeBlockRef}></div>
       </div>
     ) : (
       <Message>
