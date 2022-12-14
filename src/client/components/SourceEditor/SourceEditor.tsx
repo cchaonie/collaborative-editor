@@ -5,7 +5,7 @@ import { Error } from 'sharedb';
 
 import { withSync } from '../../plugins/withSync';
 import { Message } from '../Message';
-// import { SourceView } from './components/SourceView';
+import { SourceView } from './components/SourceView';
 
 import { ClientDocument, ShareDBDocStatus, UserStatus } from '../../models';
 
@@ -97,7 +97,7 @@ export const SourceEditor = ({
         instance={editor}
         initialValue={source}
       />
-      {/* <SourceView data={source} /> */}
+      <SourceView data={source} />
     </div>
   ) : (
     <Message>
