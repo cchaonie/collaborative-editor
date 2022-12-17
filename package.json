@@ -2,7 +2,6 @@
   "name": "collaborative-editor",
   "version": "0.0.1",
   "description": "Learn collaborative softwares by creating a collaborative editor",
-  "main": "index.js",
   "scripts": {
     "build": "rimraf ./dist && cross-env NODE_ENV=production rollup -c",
     "build-dev": "rimraf ./dist && cross-env NODE_ENV=development rollup -c",
