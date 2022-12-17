@@ -8,7 +8,10 @@ export const cookieMiddleware = (
 ) => {
   const { uid } = req.cookies;
   if (!uid) {
-    res.cookie("uid", nanoid());
+    res.cookie("uid", nanoid(), {
+      secure: true,
+      httpOnly: true,
+    });
   }
   return next();
 };
