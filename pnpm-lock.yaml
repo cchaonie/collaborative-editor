@@ -32,6 +32,7 @@ specifiers:
   eslint-config-prettier: ^8.5.0
   eslint-plugin-react: ^7.31.11
   express: ^4.18.1
+  express-rate-limit: ^6.7.0
   husky: ^8.0.2
   jest: ^28.1.3
   lint-staged: ^13.1.0
@@ -62,6 +63,7 @@ dependencies:
   cookie-parser: 1.4.6
   cross-env: 7.0.3
   express: 4.18.1
+  express-rate-limit: 6.7.0_express@4.18.1
   lodash: 4.17.21
   nanoid: 4.0.0
   react: 18.2.0
@@ -5070,6 +5072,18 @@ packages:
       jest-message-util: 29.0.1
       jest-util: 29.0.1
     dev: true
+
+  /express-rate-limit/6.7.0_express@4.18.1:
+    resolution:
+      {
+        integrity: sha512-vhwIdRoqcYB/72TK3tRZI+0ttS8Ytrk24GfmsxDXK9o9IhHNO5bXRiXQSExPQ4GbaE5tvIS7j1SGrxsuWs+sGA==,
+      }
+    engines: { node: ">= 12.9.0" }
+    peerDependencies:
+      express: ^4 || ^5
+    dependencies:
+      express: 4.18.1
+    dev: false
 
   /express/4.18.1:
     resolution:
