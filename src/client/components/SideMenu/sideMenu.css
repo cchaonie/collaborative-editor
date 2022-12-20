@@ -11,6 +11,7 @@
 
 .sideMenu-operationSection {
   flex: 1 0 auto;
+  position: relative;
 }
 
 .sideMenu-operation {
@@ -27,4 +28,11 @@
 
 .sideMenu-operationText {
   margin-left: 16px;
+}
+
+.sourceCode {
+  position: absolute;
+  bottom: 8px;
+  right: 0;
+  cursor: pointer;
 }
