@@ -1,24 +1,26 @@
-import { useEffect, useRef, useState } from 'react';
-import { createEditor } from 'slate';
-import { withReact } from 'slate-react';
-import { Error } from 'sharedb';
+import { useEffect, useRef, useState } from "react";
+import { createEditor } from "slate";
+import { withReact } from "slate-react";
+import { Error } from "sharedb";
 
-import { withSync } from '../../plugins/withSync';
-import { Message } from '../Message';
-import { SourceView } from './components/SourceView';
+import { withSync } from "../../plugins/withSync";
+import { Message } from "../Message";
+import { SourceView } from "./components/SourceView";
 
-import { ClientDocument, ShareDBDocStatus, UserStatus } from '../../models';
+import { ClientDocument, ShareDBDocStatus, UserStatus } from "../../models";
 
-import { Editor } from './components/Editor';
+import { Editor } from "./components/Editor";
 
-import { SourceEditorProps } from './type';
+import { SourceEditorProps } from "./type";
 
-import styles from './sourceEditor.css';
+import styles from "./sourceEditor.css";
+import { Mode } from "../../contexts/constants";
 
 export const SourceEditor = ({
   activeFile,
   connection,
   userStatus,
+  mode,
 }: SourceEditorProps) => {
   const [source, setSource] = useState(activeFile.content);
 
@@ -51,35 +53,35 @@ export const SourceEditor = ({
       setSource(clientDocRef.current.getDocumentData());
     };
 
-    shareDBDoc.subscribe(e => {
+    shareDBDoc.subscribe((e) => {
       if (e) {
-        shareDBDocErrorHandler('SUBSCRIBE', e);
+        shareDBDocErrorHandler("SUBSCRIBE", e);
       } else {
         if (!shareDBDoc.type) {
-          console.log('INFO:', 'create new doc now.');
+          console.log("INFO:", "create new doc now.");
 
-          shareDBDoc.addListener('create', () =>
-            shareDBDocUpdateHandler('CREATE')
+          shareDBDoc.addListener("create", () =>
+            shareDBDocUpdateHandler("CREATE")
           );
 
-          shareDBDoc.create(content, e => {
+          shareDBDoc.create(content, (e) => {
             if (e) {
-              shareDBDocErrorHandler('CREATE', e);
+              shareDBDocErrorHandler("CREATE", e);
             }
           });
         } else {
-          shareDBDocUpdateHandler('SUBSCRIBE');
+          shareDBDocUpdateHandler("SUBSCRIBE");
         }
       }
     });
 
-    shareDBDoc.addListener('load', () => shareDBDocUpdateHandler('LOAD'));
+    shareDBDoc.addListener("load", () => shareDBDocUpdateHandler("LOAD"));
 
-    shareDBDoc.addListener('op', () => shareDBDocUpdateHandler('OP'));
+    shareDBDoc.addListener("op", () => shareDBDocUpdateHandler("OP"));
 
     shareDBDoc.addListener(
-      'error',
-      e => e && shareDBDocErrorHandler('GENERAL', e)
+      "error",
+      (e) => e && shareDBDocErrorHandler("GENERAL", e)
     );
 
     return () => {
@@ -92,12 +94,15 @@ export const SourceEditor = ({
     <Message>Loading......</Message>
   ) : status === ShareDBDocStatus.Loaded ? (
     <div className={styles.sourceEditor}>
-      <Editor
-        key={JSON.stringify(source)}
-        instance={editor}
-        initialValue={source}
-      />
-      <SourceView data={source} />
+      {mode === Mode.Editing ? (
+        <Editor
+          key={JSON.stringify(source)}
+          instance={editor}
+          initialValue={source}
+        />
+      ) : (
+        <SourceView data={source} />
+      )}
     </div>
   ) : (
     <Message>
