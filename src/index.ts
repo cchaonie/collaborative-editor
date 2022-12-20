@@ -27,10 +27,10 @@ app.use(loginRoute);
 
 app.use(userFilesRoute);
 
-app.get("*", baseFileMiddleware);
-
 // Apply the rate limiting middleware to all requests
 app.use(limitMiddleware);
+
+app.get("*", baseFileMiddleware);
 
 const server = http.createServer(app);
 const webSocketServer = new WebSocketServer({ server });
