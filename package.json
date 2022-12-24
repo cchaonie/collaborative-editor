@@ -24,6 +24,7 @@
     "express-rate-limit": "^6.7.0",
     "lodash": "^4.17.21",
     "nanoid": "^4.0.0",
+    "ot-json1": "^1.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
