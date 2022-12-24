@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { createEditor } from "slate";
 import { withReact } from "slate-react";
 import { Error } from "sharedb";
+// import otJSON1 from 'ot-json1';
 
 import { withSync } from "../../plugins/withSync";
 import { Message } from "../Message";
@@ -64,7 +65,10 @@ export const SourceEditor = ({
             shareDBDocUpdateHandler("CREATE")
           );
 
-          shareDBDoc.create(content, (e) => {
+          const otTypeJSON0 = "http://sharejs.org/types/JSONv0";
+          // const otTypeJSON1 = otJSON1.type.uri;
+
+          shareDBDoc.create(content, otTypeJSON0, (e) => {
             if (e) {
               shareDBDocErrorHandler("CREATE", e);
             }
