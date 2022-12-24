@@ -1,4 +1,6 @@
-# Features to be implement
+# Features
+
+## User perspective
 
 - [x] Handle split_node operation
 - [x] Handle remove_node operation
@@ -10,3 +12,11 @@
 - [x] Add bold/italic style
 - [ ] Broadcast the changes to all client
 - [ ] Use json1 as the sharedb type
+  - [x] Add ot-json1 and register it
+  - [ ] Add related converters
+
+## Tech perspective
+
+- [ ] Fix eslint warnings
+- [ ] Load configurations from a file
+- [ ] Handle compiling error gracefully, not shut down the dev server
