@@ -8,7 +8,6 @@ import { babel } from "@rollup/plugin-babel";
 import postcss from "rollup-plugin-postcss";
 import autoprefixer from "autoprefixer";
 import copy from "rollup-plugin-copy";
-import { eslint } from "rollup-plugin-eslint";
 
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
 const isPrd = process.env.NODE_ENV === "production";
@@ -55,7 +54,6 @@ export default [
       sourcemap: !isPrd,
     },
     plugins: [
-      eslint(),
       builtins(),
       resolve({
         extensions,
