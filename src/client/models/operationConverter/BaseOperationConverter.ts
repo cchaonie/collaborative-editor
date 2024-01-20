@@ -1,5 +1,4 @@
 import { BaseOperation, Descendant } from "slate";
-import _ from "lodash";
 
 import { JSON0Operation } from "./type";
 
